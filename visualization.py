@@ -6,27 +6,28 @@ Created on Mon Mar 10 19:15:57 2025
 """
 
 # visualization.py
-import matplotlib.pyplot as plt
 import streamlit as st
 from scoring import calculate_scores
-import matplotlib.font_manager as fm
 import matplotlib
+matplotlib.use("agg")  # 强制使用无GUI的绘图后端
 
-# 强制使用 agg 后端
-matplotlib.use("agg")  # 强制使用 agg 后端
+import matplotlib.pyplot as plt
+import matplotlib.font_manager as fm
+import os
 
-# 设置字体路径，假设字体文件位于 'fonts/SimHei.ttf'
-font_path = "fonts/SimHei/SimHei.ttf"  # 相对路径
+# 确认字体文件路径
+font_path = "fonts/SimHei/SimHei.ttf"
+if os.path.exists(font_path):
+    print(f"字体文件存在：{font_path}")
+else:
+    print(f"字体文件不存在：{font_path}")
 
 # 加载字体
 prop = fm.FontProperties(fname=font_path)
 
 # 设置字体
-plt.rcParams["font.family"] = prop.get_name()  # 正确设置字体
+plt.rcParams["font.family"] = prop.get_name()
 
-# 获取系统可用字体
-available_fonts = [f.name for f in fm.fontManager.ttflist]
-print("服务器上的可用字体:", available_fonts)
 
 
 
