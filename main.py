@@ -11,20 +11,19 @@ from database import Database
 from scoring import calculate_scores
 from visualization import plot_group_comparison, plot_all_students, plot_individual_details, plot_history_trend, plot_cumulative_scores
 from config import INITIAL_USERS
-# 添加中文字体设置
-def set_chinese_font():
-    st.markdown("""
-    <style>
-    * {
-        font-family: 'Microsoft YaHei', 'SimHei', 'WenQuanYi Zen Hei', sans-serif !important;
-    }
-    pre, code, kbd, samp, tt {
-        font-family: 'Courier New', monospace !important;  # 代码保持英文字体
-    }
-    </style>
-    """, unsafe_allow_html=True)
+import matplotlib.font_manager as fm
+import matplotlib
 
-set_chinese_font()
+# 设置 matplotlib 后端
+matplotlib.use("agg")
+
+# 设置字体路径
+font_path = "fonts/SimHei/SimHei.ttf"
+prop = fm.FontProperties(fname=font_path)
+
+# 设置字体
+plt.rcParams["font.family"] = prop.get_name()
+
 db = Database()
 
 # 初始化数据库
