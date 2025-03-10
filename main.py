@@ -19,13 +19,11 @@ if not db.data["users"]:
     for user in INITIAL_USERS:
         db.add_user(user)
 
-# 登录状态
+# 会话状态
 if "user" not in st.session_state:
     st.session_state.user = None
 if "page" not in st.session_state:
     st.session_state.page = "login"
-if "register_success" not in st.session_state:
-    st.session_state.register_success = False
 
 # 主页面逻辑
 def main():
@@ -44,50 +42,38 @@ def main():
 
 def login_page():
     st.title("登录")
-    nickname = st.text_input("昵称", key="login_nickname")
-    password = st.text_input("密码", type="password", key="login_password")
-    if st.button("登录"):
-        user = db.get_user(nickname, password)
-        if user:
-            st.session_state.user = user
-            st.success(f"登录成功！当前用户：{user['nickname']}")
-        else:
-            st.error("昵称或密码错误！")
-
-    if st.button("注册", key="to_register"):
+    with st.form(key="login_form"):
+        nickname = st.text_input("昵称", key="login_nickname")
+        password = st.text_input("密码", type="password", key="login_password")
+        submit_button = st.form_submit_button(label="登录")
+        if submit_button:
+            user = db.get_user(nickname, password)
+            if user:
+                st.session_state.user = user
+                st.success(f"登录成功！当前用户：{user['nickname']}")
+            else:
+                st.error("昵称或密码错误！")
+    
+    if st.button("前往注册", key="to_register"):
         st.session_state.page = "register"
-        st.session_state.register_success = False
 
 def register_page():
     st.title("注册")
-    if not st.session_state.register_success:
-        with st.form(key="register_form"):
-            nickname = st.text_input("昵称", key="register_nickname")
-            name = st.text_input("姓名", key="register_name")
-            role = st.selectbox("身份", ["学生", "老师", "管理员"], key="register_role")
-            group_options = db.get_groups() + ["未定义组"] if role != "学生" else db.get_groups()
-            group = st.selectbox("组别", group_options, key="register_group")
-            submit_button = st.form_submit_button(label="提交注册")
-
+    with st.form(key="register_form"):
+        nickname = st.text_input("昵称", key="register_nickname")
+        name = st.text_input("姓名", key="register_name")
+        role = st.selectbox("身份", ["学生", "老师", "管理员"], key="register_role")
+        group_options = db.get_groups() + ["未定义组"] if role != "学生" else db.get_groups()
+        group = st.selectbox("组别", group_options, key="register_group")
+        submit_button = st.form_submit_button(label="提交注册")
         if submit_button:
             if nickname and name:
                 user = {"nickname": nickname, "name": name, "role": role, "group": group, "password": "1234"}
                 db.add_user(user)
-                st.session_state.register_success = True
                 st.success("注册成功！初始密码为1234")
+                st.session_state.page = "login"  # 直接返回登录页面
             else:
                 st.error("请填写昵称和姓名！")
-
-    if st.session_state.register_success:
-        with st.form(key="change_password_form"):
-            new_password = st.text_input("新密码（可选）", type="password", key="register_new_password")
-            change_password_button = st.form_submit_button(label="确认更改密码")
-            if change_password_button and new_password:
-                db.update_password(nickname, new_password)
-                st.success("密码已更改！")
-        if st.button("返回登录", key="back_to_login"):
-            st.session_state.page = "login"
-            st.session_state.register_success = False
 
 def user_page():
     st.title(f"欢迎，{st.session_state.user['nickname']}")
@@ -118,43 +104,29 @@ def user_page():
 def teacher_scoring():
     st.subheader("老师打分")
     students = db.get_users_by_role("学生")
-    scores = {}
-    for student in students:
-        scores[student["nickname"]] = st.slider(f"给 {student['nickname']} 打分", 1, 15, 1, key=f"teacher_{student['nickname']}")
-    if st.button("提交分数"):
-        if all(scores.values()):
+    with st.form(key="teacher_form"):
+        scores = {student["nickname"]: st.slider(f"给 {student['nickname']} 打分", 1, 15, 1, key=f"teacher_{student['nickname']}") for student in students}
+        submit_button = st.form_submit_button(label="提交分数")
+        if submit_button and all(scores.values()):
             st.write("请确认您的打分：")
             st.json(scores)
             if st.button("确认提交吗？", key="confirm_teacher"):
                 db.save_scores(st.session_state.user["nickname"], scores)
                 st.success(f"提交成功！评分已保存为 {st.session_state.user['nickname']} 的记录")
-                st.write(f"已保存的评分数据：{scores}")
-                st.write("请检查 database.json 的 scores_history 是否更新")
-            elif st.button("再想想", key="rethink_teacher"):
-                st.write("请返回修改分数")
-        else:
-            st.error("请为所有学生打分！")
 
 def student_scoring():
     st.subheader("学生互评")
     group = st.session_state.user["group"]
     other_students = [s for s in db.get_users_by_role("学生") if s["group"] != group]
-    scores = {}
-    for student in other_students:
-        scores[student["nickname"]] = st.slider(f"给 {student['nickname']} 打分", 1, 10, 1, key=f"student_{student['nickname']}")
-    if st.button("提交分数"):
-        if all(scores.values()):
+    with st.form(key="student_form"):
+        scores = {student["nickname"]: st.slider(f"给 {student['nickname']} 打分", 1, 10, 1, key=f"student_{student['nickname']}") for student in other_students}
+        submit_button = st.form_submit_button(label="提交分数")
+        if submit_button and all(scores.values()):
             st.write("请确认您的打分：")
             st.json(scores)
             if st.button("确认提交吗？", key="confirm_student"):
                 db.save_scores(st.session_state.user["nickname"], scores)
                 st.success(f"提交成功！评分已保存为 {st.session_state.user['nickname']} 的记录")
-                st.write(f"已保存的评分数据：{scores}")
-                st.write("请检查 database.json 的 scores_history 是否更新")
-            elif st.button("再想想", key="rethink_student"):
-                st.write("请返回修改分数")
-        else:
-            st.error("请为所有其他组学生打分！")
 
 def admin_page():
     st.title("管理员后台")
