@@ -17,16 +17,13 @@ font_path = "fonts/SimHei/SimHei.ttf"  # 相对路径
 
 # 加载字体
 prop = fm.FontProperties(fname=font_path)
-plt.rcParams["font.family"] = prop.get_name()
-
-matplotlib.use("agg")  # 强制使用无 GUI 的绘图后端
+plt.rcParams["font.family"] = prop.get_nammatplotlib.use("agg")  # 强制使用无 GUI 的绘图后端
 
 # 获取系统可用字体
 available_fonts = [f.name for f in fm.fontManager.ttflist]
 print("服务器上的可用字体:", available_fonts)
 
-# 选择一个合适的中文字体
-plt.rcParams["font.family"] = "Noto Sans CJK JP"  # 适用于大多数服务器
+
 
 def plot_group_comparison(db):
     _, group_avg_scores = calculate_scores(db)
