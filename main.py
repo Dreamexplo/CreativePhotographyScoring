@@ -13,8 +13,10 @@ from visualization import plot_group_comparison, plot_all_students, plot_individ
 from config import INITIAL_USERS
 import matplotlib.font_manager as fm
 
-# 设置 matplotlib 后端
-matplotlib.use("agg")
+import matplotlib
+matplotlib.use("agg")  # 在导入其他模块之前设置后端
+import matplotlib.pyplot as plt
+
 
 # 设置字体路径
 font_path = "fonts/SimHei/SimHei.ttf"
