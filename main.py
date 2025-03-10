@@ -11,15 +11,21 @@ from database import Database
 from scoring import calculate_scores
 from visualization import plot_group_comparison, plot_all_students, plot_individual_details, plot_history_trend, plot_cumulative_scores
 from config import INITIAL_USERS
-import matplotlib.font_manager as fm
-
 import matplotlib
-matplotlib.use("agg")  # 在导入其他模块之前设置后端
+matplotlib.use("agg")  # 强制使用无GUI的绘图后端
+
 import matplotlib.pyplot as plt
+import matplotlib.font_manager as fm
+import os
 
-
-# 设置字体路径
+# 确认字体文件路径
 font_path = "fonts/SimHei/SimHei.ttf"
+if os.path.exists(font_path):
+    print(f"字体文件存在：{font_path}")
+else:
+    print(f"字体文件不存在：{font_path}")
+
+# 加载字体
 prop = fm.FontProperties(fname=font_path)
 
 # 设置字体
