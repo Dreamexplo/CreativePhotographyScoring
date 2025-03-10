@@ -12,6 +12,7 @@ from scoring import calculate_scores
 import matplotlib.font_manager as fm
 import matplotlib
 import matplotlib.font_manager as fm
+matplotlib.use("agg")  # 强制使用 agg 后端
 # 设置字体路径，假设字体文件位于 'fonts/SimHei.ttf'
 font_path = "fonts/SimHei/SimHei.ttf"  # 相对路径
 
