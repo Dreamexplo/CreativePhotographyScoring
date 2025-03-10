@@ -12,7 +12,6 @@ from scoring import calculate_scores
 from visualization import plot_group_comparison, plot_all_students, plot_individual_details, plot_history_trend, plot_cumulative_scores
 from config import INITIAL_USERS
 import matplotlib.font_manager as fm
-import matplotlib
 
 # 设置 matplotlib 后端
 matplotlib.use("agg")
