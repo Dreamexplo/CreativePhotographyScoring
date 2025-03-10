@@ -11,6 +11,21 @@ from database import Database
 from scoring import calculate_scores
 from visualization import plot_group_comparison, plot_all_students, plot_individual_details, plot_history_trend, plot_cumulative_scores
 from config import INITIAL_USERS
+# 增强版CSS注入（在main.py开头添加）
+st.markdown('''
+<style>
+/* 强制全局字体 */
+*:not(code):not(.code-font):not(.ace_editor):not(.streamlit-expanderHeader):not(.st-emotion-cache-1qg05tj) {
+    font-family: 'Microsoft YaHei', 'WenQuanYi Micro Hei', 'SimHei', sans-serif !important;
+}
+
+/* 解决部分组件字体覆盖问题 */
+.stSelectbox label, .stSlider label, .stRadio label, .stTextInput label {
+    font-family: 'Microsoft YaHei' !important;
+}
+</style>
+''', unsafe_allow_html=True)
+
 import matplotlib
 matplotlib.use("agg")  # 强制使用无GUI的绘图后端
 
