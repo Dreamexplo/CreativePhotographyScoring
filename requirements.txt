@@ -3,3 +3,6 @@ pandas
 numpy
 matplotlib>=3.5
 seaborn
+plotly
+cryptography
+fonts-wqy-zenhei
