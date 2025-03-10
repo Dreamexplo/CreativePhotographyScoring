@@ -31,7 +31,6 @@ plt.rcParams["font.family"] = prop.get_name()
 
 
 
-
 def plot_group_comparison(db):
     _, group_avg_scores = calculate_scores(db)
     fig, ax = plt.subplots()
