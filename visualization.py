@@ -8,6 +8,22 @@ Created on Mon Mar 10 19:15:57 2025
 # visualization.py
 import streamlit as st
 from scoring import calculate_scores
+
+# 增强版CSS注入（在main.py开头添加）
+st.markdown('''
+<style>
+/* 强制全局字体 */
+*:not(code):not(.code-font):not(.ace_editor):not(.streamlit-expanderHeader):not(.st-emotion-cache-1qg05tj) {
+    font-family: 'Microsoft YaHei', 'WenQuanYi Micro Hei', 'SimHei', sans-serif !important;
+}
+
+/* 解决部分组件字体覆盖问题 */
+.stSelectbox label, .stSlider label, .stRadio label, .stTextInput label {
+    font-family: 'Microsoft YaHei' !important;
+}
+</style>
+''', unsafe_allow_html=True)
+
 import matplotlib
 matplotlib.use("agg")  # 强制使用无GUI的绘图后端
 
