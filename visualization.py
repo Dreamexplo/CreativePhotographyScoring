@@ -10,6 +10,8 @@ import matplotlib.pyplot as plt
 import streamlit as st
 from scoring import calculate_scores
 import matplotlib.font_manager as fm
+import matplotlib
+matplotlib.use("agg")  # 强制使用无 GUI 的绘图后端
 
 # 获取系统可用字体
 available_fonts = [f.name for f in fm.fontManager.ttflist]
