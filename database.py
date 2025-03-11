@@ -52,21 +52,28 @@ class Database:
         self.data["users"].append(user)
         self.save()
 
-    def get_user(self, nickname, password):
-        for user in self.data["users"]:
-            if user["nickname"] == nickname and user["password"] == password:
-                return user
-        return None
+    def user_page():
+        if "user" not in st.session_state or st.session_state.user is None:
+            st.error("用户未登录或会话信息无效")
+            return
 
-    def update_password(self, nickname, new_password):
-        print(f"Attempting to update password for user: {nickname}")
-        user = self.get_user_by_nickname(nickname)
+        # 调试输出
+        print(f"Session State User: {st.session_state.user}")
+        nickname = st.session_state.user.get("nickname", None)
     
-        if user:
-            user['password'] = new_password
-            self.save()  # 保存更新后的数据
+        if not nickname:
+            st.error("用户昵称不存在，无法更新密码")
+            return
+
+        # 假设这是更新密码的操作
+        new_password = st.text_input("新密码")
+        confirm_password = st.text_input("确认新密码")
+
+        if new_password and new_password == confirm_password:
+            db.update_password(nickname, new_password)
+            st.success("密码更新成功")
         else:
-            raise ValueError(f"用户 {nickname} 不存在！")
+            st.error("密码不匹配，请重新输入")
 
     def reset_password(self, nickname):
         return self.update_password(nickname, "1234")
