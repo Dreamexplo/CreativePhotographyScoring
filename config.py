@@ -7,9 +7,9 @@ Created on Mon Mar 10 19:07:02 2025
 
 # config.py
 INITIAL_GROUPS = {
-    "第一组": ["学生1", "学生2", "学生3", "学生4", "学生5"],
-    "第二组": ["学生6", "学生7", "学生8", "学生9", "学生10"],
-    "第三组": ["学生11", "学生12", "学生13", "学生14", "学生15"]
+        "group1": ["student1", "student2", "student3", "student4", "student5"],
+        "group2": ["student6", "student7", "student8", "student9", "student10"],
+        "group3": ["student11", "student12", "student13", "student14", "student15"]
 }
 
 INITIAL_USERS = [
