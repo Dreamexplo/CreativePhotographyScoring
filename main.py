@@ -130,16 +130,17 @@ def user_page():
             plot_history_trend(db)
 
     # 修改密码
-    if st.button("更改密码"):
-        new_password = st.text_input("请输入新密码", type="password", key="user_new_password")
-        confirm_password = st.text_input("确认密码", type="password", key="user_confirm_password")
-        if st.button("确认更改密码"):
-            if new_password == confirm_password:
-                db.update_password(st.session_state.user["nickname"], new_password)
-                st.session_state.user["password"] = new_password  # 更新会话状态中的密码
-                st.success("密码已更改！")
-            else:
-                st.error("两次输入的密码不一致！")
+    st.subheader("修改密码")
+    new_password = st.text_input("请输入新密码", type="password", key="user_new_password")
+    confirm_password = st.text_input("确认新密码", type="password", key="user_confirm_password")
+    
+    if st.button("确认更改密码"):
+        if new_password == confirm_password:
+            db.update_password(st.session_state.user["nickname"], new_password)
+            st.session_state.user["password"] = new_password  # 更新会话状态中的密码
+            st.success("密码已更改！")
+        else:
+            st.error("两次输入的密码不一致，请重新输入。")
 
 
 def teacher_scoring():
