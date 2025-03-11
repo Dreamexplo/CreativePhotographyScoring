@@ -5,7 +5,6 @@ Created on Mon Mar 10 19:14:57 2025
 @author: 33952
 """
 
-# database.py
 import json
 import os
 from datetime import datetime
@@ -54,18 +53,15 @@ class Database:
                 return user
         return None
 
-
     def update_password(self, nickname, new_password):
         # 查找用户
         user = self.get_user_by_nickname(nickname)
         if user:
             # 如果找到用户，更新密码
             user['password'] = new_password
-            self.save_data()  # 假设你有一个保存数据的函数
+            self.save()  # 保存更新后的数据
         else:
             raise ValueError(f"用户 {nickname} 不存在！")
-
-
 
     def reset_password(self, nickname):
         return self.update_password(nickname, "1234")
@@ -96,3 +92,4 @@ class Database:
 
     def get_scores_history(self):
         return self.data["scores_history"]
+
