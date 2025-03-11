@@ -5,10 +5,20 @@ Created on Mon Mar 10 19:14:57 2025
 @author: 33952
 """
 
+import json
+import os
+from datetime import datetime
+
 class Database:
     def __init__(self, db_file="database.json"):
+        # 检查 db_file 的路径是否存在
         self.db_file = db_file
-        if not os.path.exists(db_file):
+        
+        # 使用绝对路径来避免路径问题
+        self.db_file = os.path.abspath(self.db_file)
+        
+        # 如果文件不存在，创建一个新的数据库文件
+        if not os.path.exists(self.db_file):
             self.data = {"users": [], "scores_history": []}
             self.save()
         else:
@@ -43,17 +53,14 @@ class Database:
         self.save()
 
     def get_user(self, nickname, password):
-        # 查找具有匹配昵称和密码的用户
         for user in self.data["users"]:
             if user["nickname"] == nickname and user["password"] == password:
                 return user
         return None
 
     def update_password(self, nickname, new_password):
-        # 查找用户
         user = self.get_user_by_nickname(nickname)
         if user:
-            # 如果找到用户，更新密码
             user['password'] = new_password
             self.save()  # 保存更新后的数据
         else:
@@ -88,4 +95,5 @@ class Database:
 
     def get_scores_history(self):
         return self.data["scores_history"]
+
 
