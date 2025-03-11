@@ -59,7 +59,9 @@ class Database:
         return None
 
     def update_password(self, nickname, new_password):
+        print(f"Attempting to update password for user: {nickname}")
         user = self.get_user_by_nickname(nickname)
+    
         if user:
             user['password'] = new_password
             self.save()  # 保存更新后的数据
