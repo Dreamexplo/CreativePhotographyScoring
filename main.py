@@ -140,13 +140,11 @@ def teacher_scoring():
     students = db.get_users_by_role("学生")
     with st.form(key="teacher_form"):
         scores = {student["nickname"]: st.slider(f"给 {student['nickname']} 打分", 1, 15, 1, key=f"teacher_{student['nickname']}") for student in students}
-        submit_button = st.form_submit_button(label="提交分数")
+        submit_button = st.form_submit_button(label="确认提交吗？")  # ✅ 直接使用 `st.form_submit_button()`
+    
         if submit_button and all(scores.values()):
-            st.write("请确认您的打分：")
-            st.json(scores)
-            if st.button("确认提交吗？", key="confirm_teacher"):
-                db.save_scores(st.session_state.user["nickname"], scores)
-                st.success(f"提交成功！评分已保存为 {st.session_state.user['nickname']} 的记录")
+            db.save_scores(st.session_state.user["nickname"], scores)
+            st.success(f"提交成功！评分已保存为 {st.session_state.user['nickname']} 的记录")
 
 def student_scoring():
     st.subheader("学生互评")
