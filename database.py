@@ -55,12 +55,13 @@ class Database:
         return None
 
     def update_password(self, nickname, new_password):
-        for user in self.data["users"]:
-            if user["nickname"] == nickname:
-                user["password"] = new_password
-                self.save()
-                return True
+        user = self.get_user_by_nickname(nickname)
+        if user:
+            user["password"] = new_password  # 更新密码
+            self.save_data()  # 保存数据库
+            return True
         return False
+
 
     def reset_password(self, nickname):
         return self.update_password(nickname, "1234")
