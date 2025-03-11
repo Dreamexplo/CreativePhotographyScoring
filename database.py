@@ -5,10 +5,6 @@ Created on Mon Mar 10 19:14:57 2025
 @author: 33952
 """
 
-import json
-import os
-from datetime import datetime
-
 class Database:
     def __init__(self, db_file="database.json"):
         self.db_file = db_file
@@ -46,10 +42,10 @@ class Database:
         self.data["users"].append(user)
         self.save()
 
-    def get_user_by_nickname(self, nickname):
-        # 假设用户数据保存在 `self.data["users"]` 中
+    def get_user(self, nickname, password):
+        # 查找具有匹配昵称和密码的用户
         for user in self.data["users"]:
-            if user["nickname"] == nickname:
+            if user["nickname"] == nickname and user["password"] == password:
                 return user
         return None
 
