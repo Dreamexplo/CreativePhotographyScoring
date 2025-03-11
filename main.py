@@ -165,6 +165,14 @@ def student_scoring():
             db.save_scores(st.session_state.user["nickname"], scores)
             st.success(f"提交成功！评分已保存为 {st.session_state.user['nickname']} 的记录")
 
+def reset_password(self, nickname):
+    user = self.get_user_by_nickname(nickname)
+    if user:
+        user["password"] = "1234"  # 重置密码为默认的1234
+        self.save_data()  # 保存数据库
+        return True
+    return False
+
 
 def admin_page():
     st.title("管理员后台")
@@ -194,7 +202,16 @@ def admin_page():
         plot_history_trend(db)
     elif option == "查看累计分数":
         st.subheader("历史累计分数")
-        plot_cumulative_scores(db)
+
+def reset_password(self, nickname):
+    user = self.get_user_by_nickname(nickname)
+    if user:
+        user["password"] = "1234"  # 重置密码为默认的1234
+        self.save_data()  # 保存数据库
+        return True
+    return False
+
+
 
 if __name__ == "__main__":
     main()
