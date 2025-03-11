@@ -47,12 +47,13 @@ class Database:
         self.data["users"].append(user)
         self.save()
 
-    def get_user(self, nickname, password=None):
+    def get_user_by_nickname(self, nickname):
+        # 假设用户数据保存在 `self.data["users"]` 中
         for user in self.data["users"]:
             if user["nickname"] == nickname:
-                if password is None or user["password"] == password:
-                    return user
+                return user
         return None
+
 
     def update_password(self, nickname, new_password):
         # 查找用户
