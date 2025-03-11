@@ -9,6 +9,17 @@ Created on Mon Mar 10 19:15:57 2025
 import streamlit as st
 from scoring import calculate_scores
 
+def show_visualizations(db, scores, history_scores=None):
+    st.markdown("""
+        <style>
+        body { font-family: 'Microsoft YaHei', sans-serif; }
+        </style>
+    """, unsafe_allow_html=True)
+
+    if scores.empty:
+        st.write("暂无评分数据")
+        return
+        
 # 增强版CSS注入（在main.py开头添加）
 st.markdown('''
 <style>
