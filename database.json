@@ -1,108 +1,108 @@
 {
   "users": [
     {
-      "nickname": "学生1",
-      "name": "学生1",
-      "role": "学生",
-      "group": "第一组",
+      "nickname": "Student1",
+      "name": "Student1",
+      "role": "Student",
+      "group": "Group 1",
       "password": "1234"
     },
     {
-      "nickname": "学生2",
-      "name": "学生2",
-      "role": "学生",
-      "group": "第一组",
+      "nickname": "Student2",
+      "name": "Student2",
+      "role": "Student",
+      "group": "Group 1",
       "password": "1234"
     },
     {
-      "nickname": "学生3",
-      "name": "学生3",
-      "role": "学生",
-      "group": "第一组",
+      "nickname": "Student3",
+      "name": "Student3",
+      "role": "Student",
+      "group": "Group 1",
       "password": "1234"
     },
     {
-      "nickname": "学生4",
-      "name": "学生4",
-      "role": "学生",
-      "group": "第一组",
+      "nickname": "Student4",
+      "name": "Student4",
+      "role": "Student",
+      "group": "Group 1",
       "password": "1234"
     },
     {
-      "nickname": "学生5",
-      "name": "学生5",
-      "role": "学生",
-      "group": "第一组",
+      "nickname": "Student5",
+      "name": "Student5",
+      "role": "Student",
+      "group": "Group 1",
       "password": "1234"
     },
     {
-      "nickname": "学生6",
-      "name": "学生6",
-      "role": "学生",
-      "group": "第二组",
+      "nickname": "Student6",
+      "name": "Student6",
+      "role": "Student",
+      "group": "Group 2",
       "password": "1234"
     },
     {
-      "nickname": "学生7",
-      "name": "学生7",
-      "role": "学生",
-      "group": "第二组",
+      "nickname": "Student7",
+      "name": "Student7",
+      "role": "Student",
+      "group": "Group 2",
       "password": "1234"
     },
     {
-      "nickname": "学生8",
-      "name": "学生8",
-      "role": "学生",
-      "group": "第二组",
+      "nickname": "Student8",
+      "name": "Student8",
+      "role": "Student",
+      "group": "Group 2",
       "password": "1234"
     },
     {
-      "nickname": "学生9",
-      "name": "学生9",
-      "role": "学生",
-      "group": "第二组",
+      "nickname": "Student9",
+      "name": "Student9",
+      "role": "Student",
+      "group": "Group 2",
       "password": "1234"
     },
     {
-      "nickname": "学生10",
-      "name": "学生10",
-      "role": "学生",
-      "group": "第二组",
+      "nickname": "Student10",
+      "name": "Student10",
+      "role": "Student",
+      "group": "Group 2",
       "password": "1234"
     },
     {
-      "nickname": "学生11",
-      "name": "学生11",
-      "role": "学生",
-      "group": "第三组",
+      "nickname": "Student11",
+      "name": "Student11",
+      "role": "Student",
+      "group": "Group 3",
       "password": "1234"
     },
     {
-      "nickname": "学生12",
-      "name": "学生12",
-      "role": "学生",
-      "group": "第三组",
+      "nickname": "Student12",
+      "name": "Student12",
+      "role": "Student",
+      "group": "Group 3",
       "password": "1234"
     },
     {
-      "nickname": "学生13",
-      "name": "学生13",
-      "role": "学生",
-      "group": "第三组",
+      "nickname": "Student13",
+      "name": "Student13",
+      "role": "Student",
+      "group": "Group 3",
       "password": "1234"
     },
     {
-      "nickname": "学生14",
-      "name": "学生14",
-      "role": "学生",
-      "group": "第三组",
+      "nickname": "Student14",
+      "name": "Student14",
+      "role": "Student",
+      "group": "Group 3",
       "password": "1234"
     },
     {
-      "nickname": "学生15",
-      "name": "学生15",
-      "role": "学生",
-      "group": "第三组",
+      "nickname": "Student15",
+      "name": "Student15",
+      "role": "Student",
+      "group": "Group 3",
       "password": "1234"
     },
     {
@@ -119,13 +119,7 @@
       "group": "未定义组",
       "password": "1234"
     },
-    {
-      "nickname": "三点水",
-      "name": "鱼淼",
-      "role": "管理员",
-      "group": "第二组",
-      "password": "1234"
-    }
+  
     
   ],
   "scores_history": []
